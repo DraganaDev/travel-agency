@@ -1,3 +1,9 @@
+# Fake API with json-server at port 4000
+
+This project uses json-server that fakes server so hotels can be fetched. To run it, use:
+
+### `npx json-server --watch data/db.json --port 4000`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

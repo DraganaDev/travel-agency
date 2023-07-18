@@ -1,4 +1,3 @@
-import React from "react";
 import {
   MdRestaurant,
   MdFreeBreakfast,
@@ -10,8 +9,13 @@ import {
   MdKitchen,
 } from "react-icons/md";
 import { IoMdBus, IoMdSnow } from "react-icons/io";
+import useSingleHotel from "../hooks/useSingleHotel";
+import { useParams } from "react-router-dom";
 
-const Amenities = ({ hotel }) => {
+const Amenities = () => {
+  const { name } = useParams();
+  const { data: hotel } = useSingleHotel(name);
+
   const allAmenities = {
     breakfast: <MdFreeBreakfast />,
     kitchen: <MdKitchen />,
@@ -24,11 +28,12 @@ const Amenities = ({ hotel }) => {
     wifi: <MdWifi />,
     air: <IoMdSnow />,
   };
+
   return (
     <div className="popular-amenities">
       <h3>Popular amenities</h3>
       <ul className="amenities-flex">
-        {hotel.amenities.map((amenitie) => (
+        {hotel?.amenities?.map((amenitie) => (
           <li key={amenitie.name}>
             <span className="icon"> {allAmenities[amenitie.icon]}</span>
             {amenitie.name}

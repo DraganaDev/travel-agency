@@ -1,6 +1,6 @@
 import React from "react";
 
-const Destination = ({ place, title, src }) => {
+const Destination = ({ place, title, imageUrl }) => {
   return (
     <div className={`${place}-bg`}>
       <section className={`destination ${place}-layout container`}>
@@ -17,7 +17,7 @@ const Destination = ({ place, title, src }) => {
           </p>
         </div>
         <div className="destination-img">
-          <img src={src} alt={title} />
+          <img src={imageUrl} alt={title} />
         </div>
       </section>
     </div>

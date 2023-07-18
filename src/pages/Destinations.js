@@ -1,11 +1,11 @@
 import React from "react";
 // import { useOutletContext, useParams, Link } from "react-router-dom";
-import turkiye1 from "../../images/turkey4.jpg";
-import egypt from "../../images/egypt2.jpg";
-import greece from "../../images/greece.jpg";
-import Antalya from "../Antalya";
-import Destination from "../Destination";
-import Paragraph from "../Paragraph";
+import turkiye1 from "../assets/images/turkey4.jpg";
+import egypt from "../assets/images/egypt2.jpg";
+import greece from "../assets/images/greece.jpg";
+import Antalya from "../components/Antalya";
+import Destination from "../components/Destination";
+import Paragraph from "../components/Paragraph";
 
 const Destinations = () => {
   const antalyaPlaces = ["Alanya", "Belek", "Kemer", "Side"];
@@ -34,8 +34,16 @@ const Destinations = () => {
           </aside>
         </div>
       </div>
-      <Destination place="greece" title="Aegean sea in Greece" src={greece} />
-      <Destination place="egypt" title="Egypts' ancient places" src={egypt} />
+      <Destination
+        place="greece"
+        title="Aegean sea in Greece"
+        imageUrl={greece}
+      />
+      <Destination
+        place="egypt"
+        title="Egypts' ancient places"
+        imageUrl={egypt}
+      />
     </div>
   );
 };

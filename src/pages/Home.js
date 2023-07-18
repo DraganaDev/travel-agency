@@ -1,16 +1,16 @@
 import React from "react";
-import mountain from "../../images/mountain.jpg";
-import city from "../../images/city.jpg";
-import beach from "../../images/beach.jpg";
-import antalya from "../../images/antalya.jpg";
-import bodrum from "../../images/bodrum.jpg";
-import kapadokya from "../../images/kapadokya.jpg";
-import istanbul from "../../images/istanbul.jpg";
-import hurgada from "../../images/hurgada.jpg";
-import santorini from "../../images/santorini.jpg";
+import mountain from "../assets/images/mountain.jpg";
+import city from "../assets/images/city.jpg";
+import beach from "../assets/images/beach.jpg";
+import antalya from "../assets/images/antalya.jpg";
+import bodrum from "../assets/images/bodrum.jpg";
+import kapadokya from "../assets/images/kapadokya.jpg";
+import istanbul from "../assets/images/istanbul.jpg";
+import hurgada from "../assets/images/hurgada.jpg";
+import santorini from "../assets/images/santorini.jpg";
 import { MdArrowForwardIos } from "react-icons/md";
 import { Link } from "react-router-dom";
-import HomeCard from "../HomeCard";
+import HomeCard from "../components/HomeCard";
 
 const Home = () => {
   const recommendedTrips = [
@@ -103,7 +103,7 @@ const Home = () => {
           {homeCards.map((card) => (
             <HomeCard
               key={card.alt}
-              src={card.src}
+              imageUrl={card.src}
               alt={card.alt}
               title={card.title}
             />

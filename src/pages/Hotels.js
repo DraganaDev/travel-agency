@@ -1,10 +1,10 @@
-import React, { useState, useRef } from "react";
-import HotelCard from "../HotelCard";
-import Filters from "../Filters";
-import NoResults from "../NoResults";
+import { useState } from "react";
+import HotelCard from "../components/HotelCard";
+import Filters from "../components/Filters";
+import NoResults from "../components/NoResults";
 import { MdFilterAlt } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
-import useHotels from "../../hooks/useHotels";
+import useHotels from "../hooks/useHotels";
 
 const Hotels = () => {
   const { data: hotels, isLoading, error } = useHotels();
@@ -12,9 +12,6 @@ const Hotels = () => {
   const [starNumber, setStarNumber] = useState("");
   const [destination, setDestination] = useState("");
   const [meal, setMeal] = useState("");
-  const selectStarsRef = useRef(null);
-  const selectDestinationRef = useRef(null);
-  const selectMealRef = useRef(null);
 
   const filters = [starNumber, destination, meal];
   let displayHotels = hotels;
@@ -41,18 +38,10 @@ const Hotels = () => {
 
   if (error) return <p>Error: {error.message}</p>;
 
-  const handleRefreshClick = () => {
-    setDestination("");
-    setStarNumber("");
-    setMeal("");
-    selectStarsRef.current.value = "";
-    selectDestinationRef.current.value = "";
-    selectMealRef.current.value = "";
-  };
-
   const closeFilters = () => {
     setShowFilters(false);
   };
+
   return (
     <div>
       <div className="container filters-hotels-flex">
@@ -62,13 +51,9 @@ const Hotels = () => {
             <IoMdCloseCircle size={30} />
           </button>
           <Filters
-            selectStarsRef={selectStarsRef}
-            selectMealRef={selectMealRef}
-            selectDestinationRef={selectDestinationRef}
             setMeal={setMeal}
             setStarNumber={setStarNumber}
             setDestination={setDestination}
-            showFilters={showFilters}
             closeFilters={closeFilters}
           />
         </div>
@@ -89,10 +74,10 @@ const Hotels = () => {
           </div>
           {displayHotels.length !== 0 ? (
             displayHotels?.map((hotel) => (
-              <HotelCard key={hotel.id} hotel={hotel} />
+              <HotelCard key={hotel.id} name={hotel.hotelName.toLowerCase()} />
             ))
           ) : (
-            <NoResults handleRefreshClick={handleRefreshClick} />
+            <NoResults />
           )}
         </div>
       </div>

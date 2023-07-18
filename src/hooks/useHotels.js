@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import APIClient from "../APIClient";
+
+const apiClient = new APIClient("/hotelsArray");
 
 const useHotels = () => {
   return useQuery({
     queryKey: ["hotels"],
-    queryFn: () =>
-      axios.get("http://localhost:4000/hotelsArray").then((res) => res.data),
+    queryFn: apiClient.getAll,
     staleTime: 24 * 60 * 60 * 1000,
   });
 };

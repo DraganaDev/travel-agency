@@ -1,18 +1,12 @@
 import React from "react";
 
-const Select = ({ id, selectRef, label, filters, onChange, onKeyDown }) => {
+const Select = ({ id, label, filters, onChange, onKeyDown }) => {
   return (
     <div>
       <label className="label-select" htmlFor={id}>
         Choose {label}:
       </label>
-      <select
-        ref={selectRef}
-        name={id}
-        id={id}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-      >
+      <select name={id} id={id} onChange={onChange} onKeyDown={onKeyDown}>
         <option value="">All</option>
         {filters.map((filter) => (
           <option key={filter} value={filter}>

@@ -1,25 +1,22 @@
-import React, { useMemo } from "react";
-import { useOutletContext, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import TravelOverview from "../TravelOverview";
-import Star from "../Star";
-import Amenities from "../Amenities";
-import GoogleMap from "../GoogleMap";
+import TravelOverview from "../components/TravelOverview";
+import Star from "../components/Star";
+import Amenities from "../components/Amenities";
+import GoogleMap from "../components/GoogleMap";
+import useSingleHotel from "../hooks/useSingleHotel";
 
 const Hotel = () => {
-  const { hotels } = useOutletContext();
   const { name } = useParams();
+  const { data: hotel, error } = useSingleHotel(name);
 
-  const hotel = useMemo(
-    () => hotels.find((hotel) => hotel.hotelName.toLowerCase() === name),
-    [hotels, name]
-  );
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>
       <div className="single-hotel container">
         <ul className="hotel-images-list">
-          {hotel?.images.map((image) => (
+          {hotel?.images?.map((image) => (
             <li key={image}>
               <img src={`../img/${image}.jpg`} alt={hotel?.hotelName} />
             </li>
@@ -35,15 +32,14 @@ const Hotel = () => {
               <FaMapMarkerAlt className="icon" />
               {hotel?.place}
             </p>
-
             <p className="rating-hotel">
               <span>{hotel?.rating}/10</span> <span>{hotel?.review}</span>
             </p>
             <p>{hotel?.numberOfReviews} reviews</p>
-            <Amenities hotel={hotel} />
-            <GoogleMap hotel={hotel} />
+            <Amenities />
+            <GoogleMap />
           </div>
-          <TravelOverview hotel={hotel} />
+          <TravelOverview />
         </div>
       </div>
     </>

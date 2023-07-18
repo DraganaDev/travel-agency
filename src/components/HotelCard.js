@@ -1,72 +1,69 @@
 import React from "react";
-import Star from "./Star";
-import { MdFreeBreakfast, MdPool, MdHotTub } from "react-icons/md";
-// import { TbInfinity } from "react-icons/tb";
-import { MdRestaurant, MdNoMeals } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { MdFreeBreakfast, MdPool, MdHotTub } from "react-icons/md";
+import { MdRestaurant, MdNoMeals } from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import Star from "./Star";
+import useSingleHotel from "../hooks/useSingleHotel";
 
-const HotelCard = ({ hotel }) => {
-  const {
-    img,
-    hotelName,
-    place,
-    stars,
-    price,
-    rating,
-    review,
-    numberOfReviews,
-    meal,
-    amenitie,
-  } = hotel;
+const HotelCard = ({ name }) => {
+  const { data: hotel, error } = useSingleHotel(name);
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
 
   return (
     <article className="hotel-card-wrapper">
       <div className="hotel-img-container">
-        <img className="hotel-img" src={`./img/${img}.jpg`} alt={hotelName} />
+        <img
+          className="hotel-img"
+          src={`./img/${hotel?.img}.jpg`}
+          alt={hotel?.hotelName}
+        />
       </div>
       <div className="hotel-info">
         <h3>
-          {hotelName} <Star stars={stars} className="star" />
+          {hotel?.hotelName} <Star stars={hotel?.stars} className="star" />
         </h3>
 
         <p className="place">
           <FaMapMarkerAlt className="icon" />
-          {place}
+          {hotel?.place}
         </p>
 
         <p className="meal">
-          {meal === "All inclusive" ? (
+          {hotel?.meal === "All inclusive" ? (
             <MdRestaurant className="icon" />
-          ) : meal === "Breakfast included" ? (
+          ) : hotel?.meal === "Breakfast included" ? (
             <MdFreeBreakfast className="icon" />
           ) : (
             <MdNoMeals className="icon" />
           )}
-          {meal}
+          {hotel?.meal}
         </p>
         <p className="amenitie">
-          {amenitie === "Pool" ? (
+          {hotel?.amenitie === "Pool" ? (
             <MdPool className="icon" />
           ) : (
             <MdHotTub className="icon" />
           )}
-          {amenitie}
+          {hotel?.amenitie}
         </p>
         <div className="rating-btn-wrapper">
           <div className="rating-reviews">
-            <p className="rating">{rating}</p>
+            <p className="rating">{hotel?.rating}</p>
             <div className="review">
-              <p>{review}</p>
-              <p>{numberOfReviews} reviews</p>
+              <p>{hotel?.review}</p>
+              <p>{hotel?.numberOfReviews} reviews</p>
             </div>
           </div>
 
           <div className="price-btn-wrapper">
-            <p className="price">&euro;{price}</p>
+            <p className="price">&euro;{hotel?.price}</p>
             <p>for 1 night</p>
             <p>includes taxes and fees</p>
-            <Link className="btn view-more" to={hotelName.toLowerCase()}>
+            <Link className="btn view-more" to={hotel?.hotelName.toLowerCase()}>
               View more
             </Link>
           </div>

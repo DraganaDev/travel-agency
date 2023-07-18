@@ -1,4 +1,5 @@
 import React from "react";
+import ContactLinks from "../components/ContactLinks";
 
 const Contact = () => {
   return (
@@ -16,15 +17,8 @@ const Contact = () => {
                   Nikola Vapcarov 22, 1000 Skopje, North Macedonia
                 </address>
               </li>
-              <li>
-                <span>Phone: </span>+389 2 123 1234
-              </li>
-              <li>
-                <span>Email: </span>travellog@travel.com.mk
-              </li>
-              <li>
-                <span>Viber: </span>+389 77 101 202
-              </li>
+
+              <ContactLinks linkClass="pick-an-app-link" />
               <li>
                 <span>Working hours: </span>09:00h - 20:00h
               </li>

@@ -1,12 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import APIClient from "../APIClient";
-
-const apiClient = new APIClient("/hotelsArray");
+import { getHotelByName } from "../hotels";
 
 const useSingleHotel = (nameOfHotel) => {
   return useQuery({
     queryKey: ["hotels", nameOfHotel],
-    queryFn: () => apiClient.getSingleHotel(nameOfHotel),
+    queryFn: () => getHotelByName(nameOfHotel),
   });
 };
 

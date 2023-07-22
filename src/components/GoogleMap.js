@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import useSingleHotel from "../hooks/useSingleHotel";
+import useSingleHotel from "../api/hooks/useSingleHotel";
 
 const GoogleMap = () => {
   const { name } = useParams();

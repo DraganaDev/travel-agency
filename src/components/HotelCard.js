@@ -1,10 +1,14 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { MdFreeBreakfast, MdPool, MdHotTub } from "react-icons/md";
-import { MdRestaurant, MdNoMeals } from "react-icons/md";
+import {
+  MdFreeBreakfast,
+  MdPool,
+  MdHotTub,
+  MdRestaurant,
+  MdNoMeals,
+} from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Star from "./Star";
-import useSingleHotel from "../hooks/useSingleHotel";
+import useSingleHotel from "../api/hooks/useSingleHotel";
 
 const HotelCard = ({ name }) => {
   const { data: hotel, error } = useSingleHotel(name);

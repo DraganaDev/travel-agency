@@ -14,7 +14,6 @@
   --clr-accent: hsl(43, 73%, 66%);
   --clr-accent-hover: hsl(43, 100%, 66%);
   --clr-accent-link: hsl(45, 91%, 73%);
-  --clr-grey-light: hsl(43, 0%, 92%);
   --clr-white: hsl(0, 0%, 98%);
 }
 
@@ -73,13 +72,6 @@ p {
   margin-inline: auto;
 }
 
-/* -------------------------- */
-/* ROOTLAYOUT CSS */
-/* -------------------------- */
-.root-layout {
-  position: relative;
-}
-
 /* ------------------------
 ------ HEADER AND NAV ------
 ---------------------------*/
@@ -100,7 +92,7 @@ p {
   position: relative;
 }
 
-a.logo {
+.logo {
   color: var(--clr-white);
   font-size: 1.75rem;
 }
@@ -113,23 +105,20 @@ ul {
   list-style-type: none;
 }
 
-ul li a.nav-link {
+.nav-link {
+  display: inline-block;
+  padding: 5px;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 1.125rem;
   color: hsl(0, 10%, 94%);
 }
 
-ul li:has(.nav-link) {
-  padding: 5px;
-  cursor: pointer;
-}
-
-ul li a.active {
+.active {
   color: hsl(43, 100%, 80%);
 }
 
-ul li:hover a.nav-link:not(.active) {
+li:hover .nav-link:not(.active) {
   color: hsl(209, 70%, 85%);
 }
 
@@ -143,16 +132,19 @@ ul li:hover a.nav-link:not(.active) {
 .section-hero {
   background-color: var(--clr-white);
 }
+
 .hero-img {
   background-image: url(../assets/images/sea.jpg);
   min-height: 25vw;
   background-size: cover;
   background-position: right 15%;
 }
+
 .hero-content-wrapper {
   text-align: center;
   padding: 2.75rem 0;
 }
+
 .intro-hero {
   text-transform: uppercase;
   letter-spacing: 4px;
@@ -160,6 +152,7 @@ ul li:hover a.nav-link:not(.active) {
   font-size: 1rem;
   padding-bottom: 0.5em;
 }
+
 .h1-hero {
   max-width: 800px;
   line-height: 1;
@@ -229,7 +222,7 @@ ul li:hover a.nav-link:not(.active) {
   height: 100%;
 }
 
-figure img {
+.section-one-img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -252,12 +245,12 @@ figcaption .arrow {
   margin-left: 5px;
 }
 
-figure:hover,
-figure:focus {
+.section-one-img-wrapper:hover,
+.section-one-img-wrapper:focus {
   outline: 3px solid var(--clr-primary);
 }
 
-figure:hover figcaption {
+.section-one-img-wrapper:hover figcaption {
   background-color: var(--clr-accent-link);
 }
 
@@ -309,13 +302,13 @@ footer h3 {
   color: var(--clr-accent-link);
 }
 
-a.footer-link,
+.footer-link,
 .social-link {
   font-weight: normal;
   color: var(--clr-white);
 }
 
-a.footer-link:hover,
+.footer-link:hover,
 .social-link:hover {
   color: hsl(209, 70%, 85%);
 }
@@ -353,17 +346,14 @@ a.footer-link:hover,
   align-items: flex-end;
 }
 
-.hotels-layout {
-  margin-left: auto;
-  width: 60%;
-}
-.close-filters,
-.filter-btn {
-  display: none;
-}
-
 .filters-hotels-flex {
   display: flex;
+}
+
+.hotels-layout {
+  margin-left: auto;
+  padding-top: 70px;
+  width: 60%;
 }
 
 .filters-layout {
@@ -372,10 +362,8 @@ a.footer-link:hover,
   height: 600px;
 }
 
-.hotels-layout {
-  padding-top: 70px;
-}
-
+.close-filters,
+.filter-btn,
 .hotels-h2 {
   display: none;
 }
@@ -390,6 +378,7 @@ a.footer-link:hover,
 .hotel-img-container {
   background-color: var(--clr-primary-light);
   height: 40vw;
+  max-height: 300px;
 }
 
 .hotel-img {
@@ -409,13 +398,10 @@ a.footer-link:hover,
   font-weight: 700;
   color: var(--clr-primary);
 }
+
 .star {
   color: hsl(43, 74%, 49%);
   font-size: 0.875rem;
-}
-
-.hotel-img-container {
-  max-height: 300px;
 }
 
 .place {
@@ -493,6 +479,7 @@ a.footer-link:hover,
 .view-more:focus {
   background-color: var(--clr-accent-hover);
 }
+
 .price {
   font-size: 30px;
   font-weight: bold;
@@ -512,6 +499,12 @@ address {
 .contact-bg {
   background-color: var(--clr-primary-light);
   padding: 50px 0 100px;
+}
+
+.contact-bg h3 {
+  color: var(--clr-primary-one);
+  font-size: 28px;
+  margin-bottom: 25px;
 }
 
 .contact-layout {
@@ -539,13 +532,6 @@ address {
   text-decoration: underline;
 }
 
-.contact-layout h3,
-.map-wrapper h3 {
-  color: var(--clr-primary-one);
-  font-size: 28px;
-  margin-bottom: 25px;
-}
-
 .contact,
 .map-wrapper {
   width: 80%;
@@ -563,7 +549,7 @@ iframe {
 /* ------------------------
 ------ HOTEL PAGE ------
 ---------------------------*/
-.hotel-images-list li img {
+.hotel-images-list img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -609,17 +595,19 @@ iframe {
 
 .amenities-flex {
   display: flex;
-  gap: 0.5rem;
-  width: 440px;
+  justify-content: space-between;
   flex-wrap: wrap;
+  row-gap: 0.5rem;
+  max-width: 420px;
   margin-bottom: 3rem;
 }
+
 .popular-amenities {
   padding-top: 1.5rem;
 }
 
 .amenities-flex li {
-  width: 200px;
+  width: 180px;
 }
 
 .single-hotel {
@@ -658,17 +646,16 @@ iframe {
   margin-bottom: 2.5rem;
 }
 
-.travel-tour p span:last-child,
-.accommodation p span:last-child {
+.travel-tour span:last-child,
+.accommodation span:last-child,
+.rating-hotel {
   color: var(--clr-primary-one);
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .rating-hotel {
-  font-weight: 700;
   font-size: 20px;
   line-height: 1.2;
-  color: var(--clr-primary-one);
 }
 
 .price-reserve-wrapper {
@@ -687,11 +674,17 @@ iframe {
   font-size: 24px;
   margin-bottom: 0.75rem;
 }
-.refresh-btn {
+.reset-btn {
   border: 0;
   background-color: transparent;
   color: var(--clr-primary-one);
   font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.reset-btn:hover {
+  color: var(--clr-primary);
 }
 
 /* SELECT COMPONENT */
@@ -720,6 +713,54 @@ select:focus {
   display: block;
   margin-bottom: 0.5rem;
   font-family: "Roboto";
+}
+
+/* ---- LOADER COMPONENT ---- */
+.loader-wrapper {
+  display: grid;
+  place-content: center;
+  height: 80vh;
+}
+
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.loader div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid var(--clr-primary-two);
+  border-radius: 50%;
+  animation: loader 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: var(--clr-primary-two) transparent transparent transparent;
+}
+
+.loader div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.loader div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.loader div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* ------------------------
@@ -784,6 +825,7 @@ select:focus {
   .hotel-info h3 {
     font-size: 22px;
   }
+
   .hotel-info h3 > span {
     display: block;
   }
@@ -888,7 +930,8 @@ select:focus {
     margin-bottom: 20px;
   }
 
-  .filter-btn:hover {
+  .filter-btn:hover,
+  .filter-btn:focus-visible {
     color: var(--clr-accent-link);
   }
 }
@@ -1038,6 +1081,7 @@ select:focus {
     display: flex;
     justify-content: center;
   }
+
   .turkiye-img {
     width: 70%;
   }

@@ -4,42 +4,47 @@ import Filters from "../components/Filters";
 import NoResults from "../components/NoResults";
 import { MdFilterAlt } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
-import useHotels from "../hooks/useHotels";
+import useHotels from "../api/hooks/useHotels";
+import Loader from "../components/Loader";
 
 const Hotels = () => {
   const { data: hotels, isLoading, error } = useHotels();
   const [showFilters, setShowFilters] = useState(false);
-  const [starNumber, setStarNumber] = useState("");
-  const [destination, setDestination] = useState("");
-  const [meal, setMeal] = useState("");
+  const [starNumber, setStarNumber] = useState("all");
+  const [destination, setDestination] = useState("all");
+  const [meal, setMeal] = useState("all");
 
   const filters = [starNumber, destination, meal];
   let displayHotels = hotels;
 
-  if (filters && starNumber) {
+  if (starNumber !== "all") {
     displayHotels = displayHotels.filter((hotel) =>
       filters.join(" ").includes(hotel.stars.toString())
     );
   }
 
-  if (filters && destination) {
+  if (destination !== "all") {
     displayHotels = displayHotels.filter((hotel) =>
       filters.join(" ").includes(hotel.place)
     );
   }
 
-  if (filters && meal) {
+  if (meal !== "all") {
     displayHotels = displayHotels.filter((hotel) =>
       filters.join(" ").includes(hotel.meal)
     );
   }
 
-  if (isLoading) return <p>Loading....</p>;
-
   if (error) return <p>Error: {error.message}</p>;
 
   const closeFilters = () => {
     setShowFilters(false);
+  };
+
+  const resetFilters = () => {
+    setDestination("all");
+    setMeal("all");
+    setStarNumber("all");
   };
 
   return (
@@ -55,6 +60,9 @@ const Hotels = () => {
             setStarNumber={setStarNumber}
             setDestination={setDestination}
             closeFilters={closeFilters}
+            meal={meal}
+            destination={destination}
+            starNumber={starNumber}
           />
         </div>
         <div className="hotels-layout">
@@ -65,19 +73,27 @@ const Hotels = () => {
           <div className="h2-btn-wrapper">
             <h2 className="hotels-h2">Hotels</h2>
             <button
-              onClick={() => setShowFilters(!showFilters)}
+              onClick={() => setShowFilters(true)}
               title="Show filters"
               className="filter-btn"
             >
               <MdFilterAlt size={30} />
             </button>
           </div>
-          {displayHotels.length !== 0 ? (
-            displayHotels?.map((hotel) => (
-              <HotelCard key={hotel.id} name={hotel.hotelName.toLowerCase()} />
-            ))
-          ) : (
-            <NoResults />
+          {isLoading && <Loader />}
+          {!isLoading && (
+            <div>
+              {displayHotels.length !== 0 ? (
+                displayHotels?.map((hotel) => (
+                  <HotelCard
+                    key={hotel.id}
+                    name={hotel.hotelName.toLowerCase()}
+                  />
+                ))
+              ) : (
+                <NoResults resetFilters={resetFilters} />
+              )}
+            </div>
           )}
         </div>
       </div>

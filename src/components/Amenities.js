@@ -9,7 +9,7 @@ import {
   MdKitchen,
 } from "react-icons/md";
 import { IoMdBus, IoMdSnow } from "react-icons/io";
-import useSingleHotel from "../hooks/useSingleHotel";
+import useSingleHotel from "../api/hooks/useSingleHotel";
 import { useParams } from "react-router-dom";
 
 const Amenities = () => {

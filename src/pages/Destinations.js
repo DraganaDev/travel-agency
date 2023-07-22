@@ -1,7 +1,5 @@
-import React from "react";
-// import { useOutletContext, useParams, Link } from "react-router-dom";
-import turkiye1 from "../assets/images/turkey4.jpg";
-import egypt from "../assets/images/egypt2.jpg";
+import turkiye from "../assets/images/turkiye.jpg";
+import egypt from "../assets/images/egypt.jpg";
 import greece from "../assets/images/greece.jpg";
 import Antalya from "../components/Antalya";
 import Destination from "../components/Destination";
@@ -20,7 +18,7 @@ const Destinations = () => {
             <div className="img-box">
               <img
                 className="turkiye-img"
-                src={turkiye1}
+                src={turkiye}
                 alt="antalya sea coast"
               />
             </div>
